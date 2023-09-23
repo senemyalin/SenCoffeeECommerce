@@ -96,10 +96,10 @@ class RepositoryImpl @Inject constructor(
             }
         }
 
-    override fun clearCart(): Flow<NetworkResponse<Int>> =
+    override fun clearCart(userId: String): Flow<NetworkResponse<Int>> =
         flow {
             try {
-                when (val response = remoteDataSource.clearCart()) {
+                when (val response = remoteDataSource.clearCart(userId)) {
                     is NetworkResponse.Error -> emit(response)
                     NetworkResponse.Loading -> Unit
                     is NetworkResponse.Success -> emit(response)

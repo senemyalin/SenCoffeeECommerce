@@ -9,6 +9,6 @@ class ClearCartUseCaseImpl @Inject constructor(
     private val repository: Repository
 ) : ClearCartUseCase {
 
-    override fun invoke(): Flow<NetworkResponse<Int>> =
-        repository.clearCart()
+    override fun invoke(userId: String): Flow<NetworkResponse<Int>> =
+        repository.clearCart(userId)
 }

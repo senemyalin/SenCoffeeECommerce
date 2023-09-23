@@ -1,14 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.payment.PaymentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/tv_total_price"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_card_holder_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_total_price">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_card_holder_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Card Holder Name" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_credit_card_number"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_input_layout_card_holder_name"
+        app:layout_constraintStart_toStartOf="@+id/text_input_layout_card_holder_name"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_card_holder_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_credit_card_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Card Number"
+            android:maxLength="16" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_expiration_year"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@id/space_between_expiration_year_and_month"
+        app:layout_constraintStart_toStartOf="@+id/text_input_layout_card_holder_name"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_credit_card_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_expiration_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="Expiration Year"
+            android:inputType="none"
+            android:maxLength="4" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Space
+        android:id="@+id/space_between_expiration_year_and_month"
+        android:layout_width="16dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/text_input_layout_expiration_year"
+        app:layout_constraintEnd_toStartOf="@id/text_input_layout_expiration_month"
+        app:layout_constraintStart_toEndOf="@id/text_input_layout_expiration_year"
+        app:layout_constraintTop_toTopOf="@id/text_input_layout_expiration_year" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_expiration_month"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@id/text_input_layout_card_holder_name"
+        app:layout_constraintStart_toEndOf="@+id/space_between_expiration_year_and_month"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_credit_card_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_expiration_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Expiration Month"
+            android:maxLength="2" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_cvc"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_input_layout_card_holder_name"
+        app:layout_constraintStart_toStartOf="@id/text_input_layout_card_holder_name"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_expiration_year">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_cvc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CVC"
+            android:maxLength="3" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_address"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_input_layout_card_holder_name"
+        app:layout_constraintStart_toStartOf="@id/text_input_layout_card_holder_name"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_cvc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:text="PAY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_address" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

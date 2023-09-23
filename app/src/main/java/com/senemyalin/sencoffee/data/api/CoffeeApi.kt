@@ -44,7 +44,7 @@ interface CoffeeApi {
 
     @Headers("store:sencoffee")
     @POST("clear_cart.php")
-    suspend fun clearCart(): ClearCartResponse
+    suspend fun clearCart(@Body() userId: String): ClearCartResponse
 
     @Headers("store:sencoffee")
     @POST("delete_from_cart.php")

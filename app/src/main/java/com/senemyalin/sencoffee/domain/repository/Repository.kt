@@ -19,7 +19,7 @@ interface Repository {
     fun searchProduct(searchKey: String): Flow<NetworkResponse<List<Product>>>
     fun getProductDetailsById(productId: String): Flow<NetworkResponse<Product>>
     fun addToCard(addToCartRequest: AddToCartRequest): Flow<NetworkResponse<Int>>
-    fun clearCart(): Flow<NetworkResponse<Int>>
+    fun clearCart(userId: String): Flow<NetworkResponse<Int>>
     fun deleteFromCart(deleteFromCartRequest: DeleteFromCartRequest): Flow<NetworkResponse<Int>>
 
     //Local

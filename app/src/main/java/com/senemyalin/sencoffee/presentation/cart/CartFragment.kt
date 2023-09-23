@@ -38,7 +38,16 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         }
 
         observeData()
+    }
 
+    private fun setListener(price: String) {
+        binding.btnPayment.setOnClickListener {
+            findNavController().navigate(
+                CartFragmentDirections.actionCartFragmentToPaymentFragment(
+                    price
+                )
+            )
+        }
     }
 
     private fun getCartProducts(id: String) {
@@ -73,8 +82,8 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             }
         }
         binding.tvPrice.text = "Total Price: $totalPrice ₺"
-
         cartAdapter.updateList(cartProducts)
+        setListener(totalPrice.toString())
     }
 
     private fun onDeleteClick(productId: Int) {

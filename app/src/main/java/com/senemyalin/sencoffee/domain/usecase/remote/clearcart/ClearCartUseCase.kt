@@ -4,5 +4,5 @@ import com.senemyalin.sencoffee.common.NetworkResponse
 import kotlinx.coroutines.flow.Flow
 
 interface ClearCartUseCase {
-    operator fun invoke(): Flow<NetworkResponse<Int>>
+    operator fun invoke(userId: String): Flow<NetworkResponse<Int>>
 }

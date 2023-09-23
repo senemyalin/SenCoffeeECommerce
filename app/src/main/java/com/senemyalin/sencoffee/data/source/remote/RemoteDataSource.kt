@@ -13,7 +13,7 @@ interface RemoteDataSource {
     suspend fun searchProduct(searchKey: String): NetworkResponse<List<Product>>
     suspend fun getProductDetailsById(productId: String): NetworkResponse<Product>
     suspend fun addToCard(addToCartRequest: AddToCartRequest): NetworkResponse<Int>
-    suspend fun clearCart(): NetworkResponse<Int>
+    suspend fun clearCart(userId: String): NetworkResponse<Int>
     suspend fun deleteFromCart(deleteFromCartRequest: DeleteFromCartRequest): NetworkResponse<Int>
 
 }

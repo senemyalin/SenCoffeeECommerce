@@ -83,9 +83,9 @@ class RemoteDataSourceImpl @Inject constructor(
             NetworkResponse.Error(e)
         }
 
-    override suspend fun clearCart(): NetworkResponse<Int> =
+    override suspend fun clearCart(userId: String): NetworkResponse<Int> =
         try {
-            val response = coffeeApi.clearCart()
+            val response = coffeeApi.clearCart(userId)
             if (response.status == 200) {
                 NetworkResponse.Success(response.status)
             } else {

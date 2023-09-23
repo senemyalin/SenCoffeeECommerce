@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_cartFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -71,6 +74,20 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.senemyalin.sencoffee.presentation.payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/cartFragment"/>
+        <argument
+            android:name="totalprice"
             app:argType="string" />
     </fragment>
 </navigation>
