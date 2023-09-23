@@ -2,8 +2,8 @@ package com.senemyalin.sencoffee.di
 
 import android.content.Context
 import androidx.room.Room
-import com.senemyalin.sencoffee.data.dao.favouriteProductDao
-import com.senemyalin.sencoffee.data.dao.favouriteProductDatabase
+import com.senemyalin.sencoffee.data.dao.FavouriteProductDao
+import com.senemyalin.sencoffee.data.dao.FavouriteProductDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,15 +19,15 @@ object FavouriteProductDaoModule {
     @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context
-    ): favouriteProductDatabase =
+    ): FavouriteProductDatabase =
         Room.databaseBuilder(
             context,
-            favouriteProductDatabase::class.java,
+            FavouriteProductDatabase::class.java,
             "favourite_product"
         ).build()
 
     @Provides
-    fun provideProductDao(database: favouriteProductDatabase): favouriteProductDao =
+    fun provideProductDao(database: FavouriteProductDatabase): FavouriteProductDao =
         database.favouriteProductDao()
 
 }

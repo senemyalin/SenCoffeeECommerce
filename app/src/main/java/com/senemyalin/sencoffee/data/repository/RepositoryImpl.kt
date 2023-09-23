@@ -6,9 +6,7 @@ import com.senemyalin.sencoffee.data.dto.DeleteFromCartRequest
 import com.senemyalin.sencoffee.data.dto.Product
 import com.senemyalin.sencoffee.data.source.local.LocalDataSource
 import com.senemyalin.sencoffee.data.source.remote.RemoteDataSource
-import com.senemyalin.sencoffee.di.IoDispatcher
 import com.senemyalin.sencoffee.domain.repository.Repository
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -17,8 +15,7 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val localDataSource: LocalDataSource
 ) : Repository {
 
     override fun getAllProducts(): Flow<NetworkResponse<List<Product>>> =
@@ -126,7 +123,7 @@ class RepositoryImpl @Inject constructor(
         }
 
     override suspend fun addProduct(product: Product) =
-        withContext(ioDispatcher) {
+        withContext(Dispatchers.IO) {
             try {
                 localDataSource.addProduct(product)
             } catch (e: Exception) {
@@ -138,7 +135,7 @@ class RepositoryImpl @Inject constructor(
         localDataSource.getAllProductsFromFavourite()
 
     override suspend fun deleteProduct(product: Product) =
-        withContext(ioDispatcher) {
+        withContext(Dispatchers.IO) {
             try {
                 localDataSource.deleteProduct(product)
             } catch (e: Exception) {
@@ -146,8 +143,8 @@ class RepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun deleteAllProducts()  =
-        withContext(ioDispatcher) {
+    override suspend fun deleteAllProducts() =
+        withContext(Dispatchers.IO) {
             try {
                 localDataSource.deleteAllProducts()
             } catch (e: Exception) {
