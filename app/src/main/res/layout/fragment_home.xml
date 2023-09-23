@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="16dp"
+    android:orientation="vertical"
+    app:chainUseRtl="true"
+    tools:context=".presentation.home.HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_all_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="All Products"
+                android:textAlignment="center"
+                android:textSize="26sp"
+                app:chainUseRtl="true"
+                app:layout_constraintBottom_toTopOf="@id/rv_all_products"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_all_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chainUseRtl="true"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/tv_sale_products"
+                app:layout_constraintTop_toBottomOf="@id/tv_all_products"
+                app:spanCount="2" />
+
+            <TextView
+                android:id="@+id/tv_sale_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Sale Products"
+                android:textAlignment="center"
+                android:textSize="26sp"
+                app:chainUseRtl="true"
+                app:layout_constraintBottom_toTopOf="@id/rv_sale_products"
+                app:layout_constraintTop_toBottomOf="@id/rv_all_products" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sale_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chainUseRtl="true"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sale_products"
+                app:spanCount="2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>
