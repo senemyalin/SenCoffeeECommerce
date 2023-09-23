@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.senemyalin.sencoffee.R
 import com.senemyalin.sencoffee.common.viewBinding
 import com.senemyalin.sencoffee.data.dto.Product
@@ -25,7 +27,16 @@ class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
 
         binding.rvFavouriteProducts.adapter = favouritesAdapter
         getFavouriteProducts()
+        setListener()
         observeData()
+    }
+
+    private fun setListener() {
+        binding.btnLogout.setOnClickListener {
+            viewModel.deleteAllFavouriteProducts()
+            Firebase.auth.signOut()
+            findNavController().navigate(FavouritesFragmentDirections.actionFavouritesFragmentToLoginFragment())
+        }
     }
 
     private fun getFavouriteProducts() {

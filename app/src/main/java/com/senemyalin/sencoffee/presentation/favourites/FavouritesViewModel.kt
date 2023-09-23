@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.senemyalin.sencoffee.data.dto.Product
+import com.senemyalin.sencoffee.domain.usecase.local.deleteallfromfavourite.DeleteAllFromFavouriteUseCase
 import com.senemyalin.sencoffee.domain.usecase.local.deletefromfavourite.DeleteFromFavouriteUseCase
 import com.senemyalin.sencoffee.domain.usecase.local.getallfavouriteproducts.GetAllFavouriteProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class FavouritesViewModel @Inject constructor(
     private val getAllFavouriteProductsUseCase: GetAllFavouriteProductsUseCase,
-    private val deleteFromFavouriteUseCase: DeleteFromFavouriteUseCase
+    private val deleteFromFavouriteUseCase: DeleteFromFavouriteUseCase,
+    private val deleteAllFromFavouriteUseCase: DeleteAllFromFavouriteUseCase
 ) : ViewModel() {
 
 
@@ -29,6 +31,13 @@ class FavouritesViewModel @Inject constructor(
             }
         }
     }
+
+    fun deleteAllFavouriteProducts() {
+        viewModelScope.launch {
+            deleteAllFromFavouriteUseCase()
+        }
+    }
+
 
     fun deleteFromFavourites(product: Product) {
         viewModelScope.launch {

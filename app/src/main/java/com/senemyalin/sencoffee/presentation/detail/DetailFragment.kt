@@ -74,7 +74,18 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             btnAdd.setOnClickListener {
                 onAddClick(args.id.toInt())
             }
+            
+            ivAddToFavourites.setOnClickListener{
+                onFavouritesClick(result)
+            }
 
+        }
+    }
+
+    private fun onFavouritesClick(product: Product?) {
+        if (product != null) {
+            viewModel.addToFavourites(product)
+            requireContext().toastMessage("Add to favourites is success!")
         }
     }
 
@@ -83,7 +94,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val getUid = user?.uid
 
         viewModel.addToCart(productId, getUid!!)
-
     }
 }
 

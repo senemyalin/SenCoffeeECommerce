@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.senemyalin.sencoffee.common.NetworkResponse
 import com.senemyalin.sencoffee.data.dto.AddToCartRequest
 import com.senemyalin.sencoffee.data.dto.Product
+import com.senemyalin.sencoffee.domain.usecase.local.addtofavourite.AddToFavouriteUseCase
 import com.senemyalin.sencoffee.domain.usecase.remote.addtocart.AddToCartUseCase
 import com.senemyalin.sencoffee.domain.usecase.remote.getproductdetailsbyid.GetProductDetailsByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val getProductDetailsByIdUseCase: GetProductDetailsByIdUseCase,
-    private val addToCartUseCase: AddToCartUseCase
+    private val addToCartUseCase: AddToCartUseCase,
+    private val addToFavouriteUseCase: AddToFavouriteUseCase
 ) : ViewModel() {
 
     private var _productDetails = MutableLiveData<NetworkResponse<Product>?>()
@@ -57,6 +59,12 @@ class DetailViewModel @Inject constructor(
                     is NetworkResponse.Success -> _addToCartResponse.postValue(it)
                 }
             }
+        }
+    }
+
+    fun addToFavourites(product: Product) {
+        viewModelScope.launch {
+            addToFavouriteUseCase(product)
         }
     }
 }
