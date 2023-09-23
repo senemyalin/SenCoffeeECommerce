@@ -2,6 +2,8 @@ package com.senemyalin.sencoffee.presentation.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.senemyalin.sencoffee.common.loadImage
 import com.senemyalin.sencoffee.data.dto.Product
@@ -12,6 +14,7 @@ class CartAdapter(
     private val onDeleteClick: (Int) -> Unit
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     private val productList = mutableListOf<Product>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder =
         CartViewHolder(
