@@ -2,8 +2,6 @@ package com.senemyalin.sencoffee.presentation.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.senemyalin.sencoffee.common.loadImage
 import com.senemyalin.sencoffee.data.dto.Product
@@ -12,15 +10,17 @@ import com.senemyalin.sencoffee.databinding.ItemFavouriteBinding
 class CartAdapter(
     private val onProductClick: (Int) -> Unit,
     private val onDeleteClick: (Int) -> Unit
-) : ListAdapter<Product, CartAdapter.CartViewHolder>(CartDiffCallBack()) {
-
+) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     private val productList = mutableListOf<Product>()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder =
         CartViewHolder(
             ItemFavouriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
+
+    override fun getItemCount(): Int {
+        return productList.size
+    }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) =
         holder.bind(productList[position])
@@ -54,18 +54,6 @@ class CartAdapter(
     fun updateList(list: List<Product>) {
         productList.clear()
         productList.addAll(list)
-        notifyItemRangeChanged(0, list.size)
-    }
-
-    override fun getItemCount() = productList.size
-
-    class CartDiffCallBack : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem == newItem
-        }
+        notifyDataSetChanged()
     }
 }
